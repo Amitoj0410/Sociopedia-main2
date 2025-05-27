@@ -1,0 +1,24 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url("../homePage/pexels-mdsnmdsnmdsn-1831234.jpg"); /* Replace with your image URL */
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat-y;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
