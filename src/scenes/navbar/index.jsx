@@ -606,7 +606,9 @@ const Navbar = () => {
                               disabled={acceptingRequest}
                             >
                               {acceptingRequest ? (
-                                <CircularProgress size={(isXs || isSm) && 20} />
+                                <CircularProgress
+                                  size={isXs || isSm ? 20 : 30}
+                                />
                               ) : (
                                 <>Accept</>
                               )}
@@ -975,7 +977,7 @@ const Navbar = () => {
                                   >
                                     {acceptingRequest ? (
                                       <CircularProgress
-                                        size={(isXs || isSm) && 20}
+                                        size={isXs || isSm ? 20 : 30}
                                       />
                                     ) : (
                                       <>Accept</>

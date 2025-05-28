@@ -292,7 +292,7 @@ const Friend = ({
             disabled={sendingRequest}
           >
             {sendingRequest ? (
-              <CircularProgress size={(isXs || isSm) && 20} />
+              <CircularProgress size={isXs || isSm ? 20 : 30} />
             ) : (
               <Tooltip
                 title={<Typography fontSize={13}>Add Friend</Typography>}
