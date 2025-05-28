@@ -53,9 +53,11 @@ const Friend = ({
   const isSm = useMediaQuery(breakpoints.only("sm"));
   const isMd = useMediaQuery(breakpoints.only("md"));
 
-  const size = isXs ? "45px" : "55px";
+  const size = isXs || isSm ? "40px" : "55px";
 
-  const isFriend = friends.find((friend) => friend._id === friendId);
+  const isFriend =
+    Array.isArray(friends) &&
+    friends?.find((friend) => friend._id === friendId);
   const chkFriendReq = useSelector((state) => state.friendRequestsTo);
   // console.log(chkFriendReq);
   const sentFriendReq =
@@ -155,7 +157,7 @@ const Friend = ({
 
   return (
     <FlexBetween>
-      <FlexBetween gap="1rem">
+      <FlexBetween gap={isXs || isSm ? "0.7rem" : "1rem"}>
         <Box
           onClick={() => {
             navigate(`/profile/${friendId}`);
@@ -180,6 +182,7 @@ const Friend = ({
               fontWeight="500"
               sx={{
                 "&:hover": { color: palette.primary.light, cursor: "pointer" },
+                fontSize: (isXs || isSm) && "14px",
               }}
             >
               {name}&nbsp;
@@ -197,7 +200,7 @@ const Friend = ({
         </Box>
       </FlexBetween>
       {friendId === _id && postId ? (
-        <>
+        <Box>
           <IconButton
             sx={{ backgroundColor: primaryLight, pb: "0.6rem" }}
             aria-controls={open ? "basic-menu" : undefined}
@@ -225,16 +228,43 @@ const Friend = ({
               Delete
             </MenuItem>
           </Menu>
-        </>
+        </Box>
       ) : sentFriendReq && !isFriend ? (
+        // <Box
+        //   sx={{
+        //     border: "1px solid red",
+        //     padding: isXs || isSm ? "2px" : "3px",
+        //     borderRadius: "4px",
+        //   }}
+        // >
+        //   <Typography variant="body1">Sent</Typography>
+        // </Box>
         <Box
           sx={{
-            border: "1px solid red",
-            padding: "3px",
-            borderRadius: "4px",
+            border: "1px solid #ff3e3e", // Softer red
+            padding: isXs || isSm ? "8px 12px" : "12px 16px", // Better padding
+            borderRadius: "8px", // Smoother corners
+            backgroundColor: "#fff9f9", // Light red background
+            boxShadow: "0 2px 4px rgba(0,0,0,0.05)", // Subtle shadow
+            display: "inline-flex", // Better for inline content
+            alignItems: "center", // Center text vertically
+            gap: "8px", // Space between icon and text (if added)
+            transition: "all 0.2s ease", // Smooth hover effect
+            "&:hover": {
+              backgroundColor: "#ffeeee", // Lighter hover state
+              boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+            },
           }}
         >
-          <Typography variant="body1">Request Sent</Typography>
+          <Typography
+            variant="body1"
+            sx={{
+              color: "#d32f2f", // Darker red for better contrast
+              fontWeight: 500, // Slightly bolder
+            }}
+          >
+            Sent
+          </Typography>
         </Box>
       ) : isFriend ? ( //&& !sentFriendReq
         <IconButton

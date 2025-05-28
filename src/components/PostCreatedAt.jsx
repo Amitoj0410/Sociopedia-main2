@@ -55,8 +55,19 @@ const PostCreatedAt = ({ postId }) => {
     }
   }, [postId, token]);
 
+  // const timeAgo = createdAt
+  //   ? formatDistanceToNow(new Date(createdAt), { addSuffix: true })
+  //   : "Loading...";
+
   const timeAgo = createdAt
     ? formatDistanceToNow(new Date(createdAt), { addSuffix: true })
+        .replace("about ", "")
+        .replace(" hours", "hr")
+        .replace(" hour", "hr")
+        .replace(" minutes", "min")
+        .replace(" minute", "min")
+        .replace(" seconds", "sec")
+        .replace(" second", "sec")
     : "Loading...";
 
   return <div>{timeAgo}</div>;
