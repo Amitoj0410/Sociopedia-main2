@@ -273,7 +273,7 @@ const Friend = ({
           disabled={patchingFriend}
         >
           {patchingFriend ? (
-            <CircularProgress size={(isXs || isSm) && 20} />
+            <CircularProgress size={isXs || isSm ? 20 : 30} />
           ) : (
             <Tooltip
               title={<Typography fontSize={13}>Remove Friend</Typography>}
