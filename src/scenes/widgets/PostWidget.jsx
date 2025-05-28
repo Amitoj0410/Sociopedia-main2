@@ -138,12 +138,37 @@ const PostWidget = ({
   };
 
   const handleWhatsAppShare = () => {
-    const shareableLink = `http://localhost:3001/assets/${picturePath}`;
+    const shareableLink = `${picturePath}`;
     const shareableText = `${description}`;
     const message = `${shareableText}\n${shareableLink}`;
     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(whatsappLink, "_blank");
   };
+  // const handleWhatsAppShare = async () => {
+  //   const shareableText = `${description}`;
+  //   const shareableLink = `${picturePath}`;
+  //   const message = `${shareableText}\n${shareableLink}`;
+
+  //   if (picturePath) {
+  //     // Trigger download of the image (optional)
+  //     const a = document.createElement("a");
+  //     a.href = picturePath;
+  //     a.download = "image.jpg";
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+
+  //     // Open WhatsApp with text (user must attach manually)
+  //     const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  //     window.open(whatsappLink, "_blank");
+  //   } else {
+  //     // Share text only
+  //     window.open(
+  //       `https://wa.me/?text=${encodeURIComponent(message)}`,
+  //       "_blank"
+  //     );
+  //   }
+  // };
 
   const handleInstagramShare = () => {
     // Handle Instagram share logic
