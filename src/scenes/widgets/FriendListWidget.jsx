@@ -22,7 +22,7 @@ const FriendsListWidget = ({ userId }) => {
     try {
       setGettingFriends(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/friends`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/friends`,
         {
           method: "GET",
           headers: {

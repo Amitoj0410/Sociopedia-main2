@@ -62,7 +62,7 @@ const UserWidget = ({ userId, picturePath }) => {
     try {
       setGettingFriends(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/friends`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/friends`,
         {
           method: "GET",
           headers: {
@@ -83,7 +83,6 @@ const UserWidget = ({ userId, picturePath }) => {
     getFriends();
   }, [friends2]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log("friends details:", friends2);
   // const dispatch = useDispatch();
   const isFriend = (friendId) =>
     friends2.find((friend) => friend._id === friendId);
@@ -106,7 +105,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   const getUser = async () => {
     const response = await fetch(
-      `https://socialpedia-serverr.onrender.com/users/${userId}`,
+      `https://socialpedia-server-main-v2.onrender.com/users/${userId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -164,7 +163,7 @@ const UserWidget = ({ userId, picturePath }) => {
   //   try {
   //     setPatchingFriend(true);
   //     const response = await fetch(
-  //       `https://socialpedia-serverr.onrender.com/users/${userId}/${friendId}`,
+  //       `https://socialpedia-server-main-v2.onrender.com/users/${userId}/${friendId}`,
   //       {
   //         method: "PATCH",
   //         headers: {
@@ -189,7 +188,7 @@ const UserWidget = ({ userId, picturePath }) => {
   // const sendRequest = async (friendId) => {
   //   try {
   //     const response = await fetch(
-  //       `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/request`,
+  //       `https://socialpedia-server-main-v2.onrender.com/users/${userId}/friends/${friendId}/request`,
   //       {
   //         method: "POST",
   //         headers: {

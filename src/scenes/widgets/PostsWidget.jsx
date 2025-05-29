@@ -17,7 +17,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     try {
       setGettingPosts(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/posts`,
+        `https://socialpedia-server-main-v2.onrender.com/posts`,
         {
           //doubt : /posts/ in fetch
           method: "GET",
@@ -39,7 +39,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     try {
       setGettingUserPosts(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/posts/${userId}/posts`,
+        `https://socialpedia-server-main-v2.onrender.com/posts/${userId}/posts`,
         {
           //doubt : /posts/ in fetch
           method: "GET",

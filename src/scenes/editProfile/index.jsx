@@ -15,7 +15,7 @@
 //   const handleEditProfile = async (values, onSubmitProps) => {
 //     // Assuming you have an API endpoint for updating user profile
 //     const updatedUserResponse = await fetch(
-//       `https://socialpedia-serverr.onrender.com/auth/${user._id}/editProfile`,
+//       `https://socialpedia-server-main-v2.onrender.com/auth/${user._id}/editProfile`,
 //       {
 //         method: "PUT",
 //         headers: {
@@ -87,7 +87,7 @@ const EditProfilePage = () => {
   const handleEditProfile = async (values, onSubmitProps) => {
     try {
       const updatedUserResponse = await fetch(
-        `https://socialpedia-serverr.onrender.com/auth/${user._id}/editProfile`,
+        `https://socialpedia-server-main-v2.onrender.com/auth/${user._id}/editProfile`,
         {
           method: "PUT",
           headers: {

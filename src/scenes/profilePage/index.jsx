@@ -17,7 +17,7 @@ const ProfilePage = () => {
 
   const getUser = async () => {
     const response = await fetch(
-      `https://socialpedia-serverr.onrender.com/users/${userId}`,
+      `https://socialpedia-server-main-v2.onrender.com/users/${userId}`,
       {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },

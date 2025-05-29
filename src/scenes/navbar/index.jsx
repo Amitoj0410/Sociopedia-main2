@@ -104,7 +104,7 @@ const Navbar = () => {
   const fetchNotifications = async () => {
     try {
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${user._id}/notifications`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${user._id}/notifications`,
         {
           method: "GET",
           headers: {
@@ -159,7 +159,7 @@ const Navbar = () => {
         dispatch(setSearchType("people"));
 
         const response = await fetch(
-          `https://socialpedia-serverr.onrender.com/users/search?firstName=${value}`,
+          `https://socialpedia-server-main-v2.onrender.com/users/search?firstName=${value}`,
           {
             method: "GET",
             headers: {
@@ -200,7 +200,7 @@ const Navbar = () => {
     try {
       setAcceptingRequest(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/accept`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/friends/${friendId}/accept`,
         {
           method: "POST",
           headers: {
@@ -216,7 +216,7 @@ const Navbar = () => {
 
         // Remove notification from backend
         const removeResponse = await fetch(
-          `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
+          `https://socialpedia-server-main-v2.onrender.com/users/${userId}/removeNotification/${notificationId}`,
           {
             method: "DELETE",
             headers: {
@@ -243,7 +243,7 @@ const Navbar = () => {
     try {
       setDecliningRequest(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/reject`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/friends/${friendId}/reject`,
         {
           method: "POST",
           headers: {
@@ -259,7 +259,7 @@ const Navbar = () => {
 
         // Remove notification from backend
         const removeResponse = await fetch(
-          `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
+          `https://socialpedia-server-main-v2.onrender.com/users/${userId}/removeNotification/${notificationId}`,
           {
             method: "DELETE",
             headers: {
@@ -288,7 +288,7 @@ const Navbar = () => {
     try {
       setRemovingNotification(true);
       const removeResponse = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/removeNotification/${notificationId}`,
         {
           method: "DELETE",
           headers: {
@@ -390,11 +390,11 @@ const Navbar = () => {
                   !searching && searchInput.length > 0 ? "block" : "none"
                 }
               >
-                {searchedPeople.length > 0 ? (
+                {searchedPeople?.length > 0 ? (
                   <List>
-                    {searchedPeople.map((person) => (
+                    {searchedPeople?.map((person) => (
                       <ListItem
-                        key={person._id}
+                        key={person?._id}
                         onClick={() => navigate(`/profile/${person?._id}`)}
                         sx={{
                           "&:hover": {
@@ -404,13 +404,13 @@ const Navbar = () => {
                         }}
                       >
                         <FlexBetween gap={1}>
-                          <UserImage image={person.picturePath} size="40px" />
+                          <UserImage image={person?.picturePath} size="40px" />
                           <Box>
                             <Typography color={main} variant="h5">
-                              {`${person.firstName} ${person.lastName}`}
+                              {`${person?.firstName} ${person?.lastName}`}
                             </Typography>
                             <Typography color={medium}>
-                              {person.occupation}
+                              {person?.occupation}
                             </Typography>
                           </Box>
                         </FlexBetween>
@@ -473,7 +473,7 @@ const Navbar = () => {
             >
               <Badge
                 badgeContent={
-                  notifications.length > 0 ? notifications.length : null
+                  notifications?.length > 0 ? notifications?.length : null
                 }
                 color="secondary"
               >
@@ -509,38 +509,38 @@ const Navbar = () => {
               <MenuItem disabled>No notifications</MenuItem>
             ) : (
               notifications.map((notification) => (
-                <React.Fragment key={notification._id}>
+                <React.Fragment key={notification?._id}>
                   <MenuItem
                     onClick={() => {
-                      navigate(`/profile/${notification.fromUser._id}`);
+                      navigate(`/profile/${notification?.fromUser?._id}`);
                     }}
                   >
                     <Grid container alignItems="center" spacing={2}>
                       <Grid item>
                         <Avatar
-                          src={notification.fromUser.picturePath}
+                          src={notification?.fromUser?.picturePath}
                           sx={{ width: 50, height: 50 }}
                         />
                       </Grid>
                       <Grid item xs>
                         <Box>
                           <Typography variant="subtitle1">
-                            {`${notification.fromUser.firstName} ${notification.fromUser.lastName}`}
+                            {`${notification?.fromUser?.firstName} ${notification?.fromUser?.lastName}`}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
                             {notification.type === "friend_request" &&
-                              notification.fromUser.occupation}
+                              notification?.fromUser?.occupation}
                           </Typography>
                           <Typography variant="body2" color="textSecondary">
-                            {notification.type === "friend_request" &&
-                              notification.fromUser.location}
+                            {notification?.type === "friend_request" &&
+                              notification?.fromUser?.location}
                           </Typography>
-                          {notification.type === "friend_request" && (
+                          {notification?.type === "friend_request" && (
                             <Typography variant="body2" color="primary" mt={1}>
                               Friend Request
                             </Typography>
                           )}
-                          {notification.type === "post_liked" && (
+                          {notification?.type === "post_liked" && (
                             <>
                               <Typography
                                 variant="body2"
@@ -550,11 +550,11 @@ const Navbar = () => {
                                 Liked your post
                               </Typography>
                               <Typography variant="body2" color="textSecondary">
-                                {notification.post.description}
+                                {notification?.post?.description}
                               </Typography>
                             </>
                           )}
-                          {notification.type === "post_commented" && (
+                          {notification?.type === "post_commented" && (
                             <>
                               <Typography
                                 variant="body2"
@@ -568,18 +568,18 @@ const Navbar = () => {
                                 {Array.isArray(notification?.post?.comments) &&
                                   notification?.post?.comments?.find(
                                     (comment) =>
-                                      comment.id === notification.commentId
+                                      comment?.id === notification?.commentId
                                   )?.body}
                               </Typography>
                               <Typography variant="body2" color="textSecondary">
                                 <strong>Post: </strong>
-                                {notification.post.description}
+                                {notification?.post?.description}
                               </Typography>
                             </>
                           )}
                         </Box>
                       </Grid>
-                      {notification.type === "friend_request" && (
+                      {notification?.type === "friend_request" && (
                         <Grid item>
                           <Box
                             display="flex"
@@ -594,11 +594,11 @@ const Navbar = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 acceptRequest(
-                                  user._id,
-                                  notification.fromUser._id,
-                                  notification._id
+                                  user?._id,
+                                  notification?.fromUser?._id,
+                                  notification?._id
                                 );
-                                dispatch(removeNotification(notification._id));
+                                dispatch(removeNotification(notification?._id));
                                 enqueueSnackbar("Friend Request Accepted", {
                                   variant: "success",
                                 });
@@ -620,11 +620,11 @@ const Navbar = () => {
                               onClick={(e) => {
                                 e.stopPropagation();
                                 declineRequest(
-                                  user._id,
-                                  notification.fromUser._id,
-                                  notification._id
+                                  user?._id,
+                                  notification?.fromUser._id,
+                                  notification?._id
                                 );
-                                dispatch(removeNotification(notification._id));
+                                dispatch(removeNotification(notification?._id));
                                 enqueueSnackbar("Friend Request Declined", {
                                   variant: "warning",
                                 });
@@ -635,7 +635,7 @@ const Navbar = () => {
                           </Box>
                         </Grid>
                       )}
-                      {notification.type !== "friend_request" && (
+                      {notification?.type !== "friend_request" && (
                         <>
                           {notification?.post?.picturePath && (
                             <Grid item>
@@ -656,9 +656,9 @@ const Navbar = () => {
                           <IconButton
                             onClick={(e) => {
                               e.stopPropagation();
-                              dispatch(removeNotification(notification._id));
+                              dispatch(removeNotification(notification?._id));
                               // Remove from backend as well
-                              removeNotif(user._id, notification._id);
+                              removeNotif(user?._id, notification?._id);
                               enqueueSnackbar("Notification Removed", {
                                 variant: "info",
                               });
@@ -739,7 +739,7 @@ const Navbar = () => {
         >
           <Badge
             badgeContent={
-              notifications.length > 0 ? notifications.length : null
+              notifications?.length > 0 ? notifications?.length : null
             }
             color="secondary"
           >
@@ -783,7 +783,7 @@ const Navbar = () => {
               onClick={() => dispatch(setMode())}
               sx={{ fontSize: "30px" }}
             >
-              {theme.palette.mode === "dark" ? (
+              {theme?.palette?.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "30px" }} />
               ) : (
                 <LightMode sx={{ fontSize: "30px" }} />
@@ -800,7 +800,7 @@ const Navbar = () => {
             >
               <Badge
                 badgeContent={
-                  notifications.length > 0 ? notifications.length : null
+                  notifications?.length > 0 ? notifications?.length : null
                 }
                 color="secondary"
               >
@@ -843,12 +843,12 @@ const Navbar = () => {
                   </Box>
                 ) : (
                   <List>
-                    {notifications.map((notification) => (
-                      <React.Fragment key={notification._id}>
+                    {notifications?.map((notification) => (
+                      <React.Fragment key={notification?._id}>
                         <ListItem
                           button
                           onClick={() => {
-                            navigate(`/profile/${notification.fromUser._id}`);
+                            navigate(`/profile/${notification?.fromUser?._id}`);
                           }}
                           sx={{
                             "&:hover": {
@@ -861,30 +861,30 @@ const Navbar = () => {
                           <Grid container alignItems="center" spacing={2}>
                             <Grid item>
                               <Avatar
-                                src={notification.fromUser.picturePath}
+                                src={notification?.fromUser?.picturePath}
                                 sx={{ width: 50, height: 50 }}
                               />
                             </Grid>
                             <Grid item xs>
                               <Box>
                                 <Typography variant="subtitle1">
-                                  {`${notification.fromUser.firstName} ${notification.fromUser.lastName}`}
+                                  {`${notification?.fromUser?.firstName} ${notification?.fromUser?.lastName}`}
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   color="textSecondary"
                                 >
-                                  {notification.type === "friend_request" &&
-                                    notification.fromUser.occupation}
+                                  {notification?.type === "friend_request" &&
+                                    notification?.fromUser?.occupation}
                                 </Typography>
                                 <Typography
                                   variant="body2"
                                   color="textSecondary"
                                 >
-                                  {notification.type === "friend_request" &&
-                                    notification.fromUser.location}
+                                  {notification?.type === "friend_request" &&
+                                    notification?.fromUser?.location}
                                 </Typography>
-                                {notification.type === "friend_request" && (
+                                {notification?.type === "friend_request" && (
                                   <Typography
                                     variant="body2"
                                     color="primary"
@@ -893,7 +893,7 @@ const Navbar = () => {
                                     Friend Request
                                   </Typography>
                                 )}
-                                {notification.type === "post_liked" && (
+                                {notification?.type === "post_liked" && (
                                   <>
                                     <Typography
                                       variant="body2"
@@ -906,11 +906,11 @@ const Navbar = () => {
                                       variant="body2"
                                       color="textSecondary"
                                     >
-                                      {notification.post.description}
+                                      {notification?.post?.description}
                                     </Typography>
                                   </>
                                 )}
-                                {notification.type === "post_commented" && (
+                                {notification?.type === "post_commented" && (
                                   <>
                                     <Typography
                                       variant="body2"
@@ -929,8 +929,8 @@ const Navbar = () => {
                                       ) &&
                                         notification?.post?.comments?.find(
                                           (comment) =>
-                                            comment.id ===
-                                            notification.commentId
+                                            comment?.id ===
+                                            notification?.commentId
                                         )?.body}
                                     </Typography>
                                     <Typography
@@ -938,13 +938,13 @@ const Navbar = () => {
                                       color="textSecondary"
                                     >
                                       <strong>Post: </strong>
-                                      {notification.post.description}
+                                      {notification?.post?.description}
                                     </Typography>
                                   </>
                                 )}
                               </Box>
                             </Grid>
-                            {notification.type === "friend_request" && (
+                            {notification?.type === "friend_request" && (
                               <Grid item>
                                 <Box
                                   display="flex"
@@ -960,11 +960,11 @@ const Navbar = () => {
                                       e.stopPropagation();
                                       acceptRequest(
                                         user._id,
-                                        notification.fromUser._id,
-                                        notification._id
+                                        notification?.fromUser?._id,
+                                        notification?._id
                                       );
                                       dispatch(
-                                        removeNotification(notification._id)
+                                        removeNotification(notification?._id)
                                       );
                                       enqueueSnackbar(
                                         "Friend Request Accepted",
@@ -990,12 +990,12 @@ const Navbar = () => {
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       declineRequest(
-                                        user._id,
-                                        notification.fromUser._id,
-                                        notification._id
+                                        user?._id,
+                                        notification?.fromUser?._id,
+                                        notification?._id
                                       );
                                       dispatch(
-                                        removeNotification(notification._id)
+                                        removeNotification(notification?._id)
                                       );
                                       enqueueSnackbar(
                                         "Friend Request Declined",
@@ -1010,7 +1010,7 @@ const Navbar = () => {
                                 </Box>
                               </Grid>
                             )}
-                            {notification.type !== "friend_request" && (
+                            {notification?.type !== "friend_request" && (
                               <>
                                 {notification?.post?.picturePath && (
                                   <Grid item>
@@ -1032,9 +1032,9 @@ const Navbar = () => {
                                   onClick={(e) => {
                                     e.stopPropagation();
                                     dispatch(
-                                      removeNotification(notification._id)
+                                      removeNotification(notification?._id)
                                     );
-                                    removeNotif(user._id, notification._id);
+                                    removeNotif(user?._id, notification?._id);
                                     enqueueSnackbar("Notification Removed", {
                                       variant: "info",
                                     });

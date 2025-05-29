@@ -22,7 +22,7 @@ const UnknownPeopleWidget = ({ userId }) => {
     try {
       setGettingUnknowns(true);
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/users/${userId}/unknownPeople`,
+        `https://socialpedia-server-main-v2.onrender.com/users/${userId}/unknownPeople`,
         {
           method: "GET",
           headers: {

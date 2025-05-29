@@ -69,7 +69,7 @@ const Form = () => {
     // console.log(formData.get("firstName"));
     try {
       const savedChangesResponse = await fetch(
-        `https://socialpedia-serverr.onrender.com/auth/${userId}/editProfile`,
+        `https://socialpedia-server-main-v2.onrender.com/auth/${userId}/editProfile`,
         {
           method: "PUT",
           headers: {

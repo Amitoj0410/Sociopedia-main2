@@ -18,7 +18,7 @@ const HashtagsWidget = () => {
   const getHashtags = async () => {
     try {
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/hashtags`,
+        `https://socialpedia-server-main-v2.onrender.com/hashtags`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -46,7 +46,7 @@ const HashtagsWidget = () => {
   const getPostsByHashtags = async (tag) => {
     try {
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/hashtags/${tag}/posts`,
+        `https://socialpedia-server-main-v2.onrender.com/hashtags/${tag}/posts`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -66,7 +66,7 @@ const HashtagsWidget = () => {
   const getNumberOfPostsByHashtags = async (tag) => {
     try {
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/hashtags/${tag}/posts`,
+        `https://socialpedia-server-main-v2.onrender.com/hashtags/${tag}/posts`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

@@ -65,7 +65,7 @@ const MyPostWidget = ({ picturePath, userId }) => {
         // formData.append("videoPath", video.name);
       }
       const response = await fetch(
-        `https://socialpedia-serverr.onrender.com/posts`,
+        `https://socialpedia-server-main-v2.onrender.com/posts`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

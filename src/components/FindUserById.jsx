@@ -25,7 +25,7 @@ const FindUserById = ({ userId, commentTime }) => {
         // id = resultArray[0];
 
         const response = await fetch(
-          `https://socialpedia-serverr.onrender.com/users/${userId}`,
+          `https://socialpedia-server-main-v2.onrender.com/users/${userId}`,
           {
             method: "GET",
             headers: {
