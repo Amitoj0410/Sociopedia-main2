@@ -67,7 +67,7 @@ const PostWidget = ({
     try {
       setPatchingLike(true);
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/like`,
+        `https://socialpedia-serverr.onrender.com/posts/${postId}/like`,
         {
           method: "PATCH",
           headers: {
@@ -89,7 +89,7 @@ const PostWidget = ({
   const patchCommentLike = async (commId) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/comment/${commId}/like`,
+        `https://socialpedia-serverr.onrender.com/posts/${postId}/comment/${commId}/like`,
         {
           method: "PATCH",
           headers: {
@@ -109,7 +109,7 @@ const PostWidget = ({
   const handleCommentSubmit = async () => {
     const trimmedComment = newComment.trim();
     const response = await fetch(
-      `http://localhost:3001/posts/${postId}/comment`,
+      `https://socialpedia-serverr.onrender.com/posts/${postId}/comment`,
       {
         method: "POST",
         headers: {
@@ -210,7 +210,7 @@ const PostWidget = ({
   const getPostsByHashtags = async (tag) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/hashtags/${tag}/posts`,
+        `https://socialpedia-serverr.onrender.com/hashtags/${tag}/posts`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

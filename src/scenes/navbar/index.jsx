@@ -104,7 +104,7 @@ const Navbar = () => {
   const fetchNotifications = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/users/${user._id}/notifications`,
+        `https://socialpedia-serverr.onrender.com/users/${user._id}/notifications`,
         {
           method: "GET",
           headers: {
@@ -200,7 +200,7 @@ const Navbar = () => {
     try {
       setAcceptingRequest(true);
       const response = await fetch(
-        `http://localhost:3001/users/${userId}/friends/${friendId}/accept`,
+        `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/accept`,
         {
           method: "POST",
           headers: {
@@ -216,7 +216,7 @@ const Navbar = () => {
 
         // Remove notification from backend
         const removeResponse = await fetch(
-          `http://localhost:3001/users/${userId}/removeNotification/${notificationId}`,
+          `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
           {
             method: "DELETE",
             headers: {
@@ -243,7 +243,7 @@ const Navbar = () => {
     try {
       setDecliningRequest(true);
       const response = await fetch(
-        `http://localhost:3001/users/${userId}/friends/${friendId}/reject`,
+        `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/reject`,
         {
           method: "POST",
           headers: {
@@ -259,7 +259,7 @@ const Navbar = () => {
 
         // Remove notification from backend
         const removeResponse = await fetch(
-          `http://localhost:3001/users/${userId}/removeNotification/${notificationId}`,
+          `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
           {
             method: "DELETE",
             headers: {
@@ -288,7 +288,7 @@ const Navbar = () => {
     try {
       setRemovingNotification(true);
       const removeResponse = await fetch(
-        `http://localhost:3001/users/${userId}/removeNotification/${notificationId}`,
+        `https://socialpedia-serverr.onrender.com/users/${userId}/removeNotification/${notificationId}`,
         {
           method: "DELETE",
           headers: {

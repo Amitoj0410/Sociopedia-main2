@@ -5,7 +5,7 @@
 
 //   const getPost = async () => {
 //     const response = await fetch(
-//       `http://localhost:3001/posts/${postId}`,
+//       `https://socialpedia-serverr.onrender.com/posts/${postId}`,
 //       {
 //         method: "GET",
 //         headers: {
@@ -32,12 +32,15 @@ const PostCreatedAt = ({ postId }) => {
   useEffect(() => {
     const getPost = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/posts/${postId}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+        const response = await fetch(
+          `https://socialpedia-serverr.onrender.com/posts/${postId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
 
         const post = await response.json();
         setCreatedAt(post.createdAt);

@@ -62,7 +62,7 @@ const UserWidget = ({ userId, picturePath }) => {
     try {
       setGettingFriends(true);
       const response = await fetch(
-        `http://localhost:3001/users/${userId}/friends`,
+        `https://socialpedia-serverr.onrender.com/users/${userId}/friends`,
         {
           method: "GET",
           headers: {
@@ -105,10 +105,13 @@ const UserWidget = ({ userId, picturePath }) => {
   };
 
   const getUser = async () => {
-    const response = await fetch(`http://localhost:3001/users/${userId}`, {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    const response = await fetch(
+      `https://socialpedia-serverr.onrender.com/users/${userId}`,
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
     const data = await response.json();
     setUser(data);
@@ -161,7 +164,7 @@ const UserWidget = ({ userId, picturePath }) => {
   //   try {
   //     setPatchingFriend(true);
   //     const response = await fetch(
-  //       `http://localhost:3001/users/${userId}/${friendId}`,
+  //       `https://socialpedia-serverr.onrender.com/users/${userId}/${friendId}`,
   //       {
   //         method: "PATCH",
   //         headers: {
@@ -186,7 +189,7 @@ const UserWidget = ({ userId, picturePath }) => {
   // const sendRequest = async (friendId) => {
   //   try {
   //     const response = await fetch(
-  //       `http://localhost:3001/users/${userId}/friends/${friendId}/request`,
+  //       `https://socialpedia-serverr.onrender.com/users/${userId}/friends/${friendId}/request`,
   //       {
   //         method: "POST",
   //         headers: {

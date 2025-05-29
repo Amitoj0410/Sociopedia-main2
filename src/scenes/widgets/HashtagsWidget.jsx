@@ -17,10 +17,13 @@ const HashtagsWidget = () => {
 
   const getHashtags = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/hashtags`, {
-        method: "GET",
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const response = await fetch(
+        `https://socialpedia-serverr.onrender.com/hashtags`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
       if (!response.ok) {
         throw new Error("Failed to fetch hashtags");
       }
@@ -43,7 +46,7 @@ const HashtagsWidget = () => {
   const getPostsByHashtags = async (tag) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/hashtags/${tag}/posts`,
+        `https://socialpedia-serverr.onrender.com/hashtags/${tag}/posts`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },
@@ -63,7 +66,7 @@ const HashtagsWidget = () => {
   const getNumberOfPostsByHashtags = async (tag) => {
     try {
       const response = await fetch(
-        `http://localhost:3001/hashtags/${tag}/posts`,
+        `https://socialpedia-serverr.onrender.com/hashtags/${tag}/posts`,
         {
           method: "GET",
           headers: { Authorization: `Bearer ${token}` },

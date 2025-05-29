@@ -79,7 +79,7 @@ const Friend = ({
     try {
       setPatchingFriend(true);
       const response = await fetch(
-        `http://localhost:3001/users/${_id}/${friendId}`,
+        `https://socialpedia-serverr.onrender.com/users/${_id}/${friendId}`,
         {
           method: "PATCH",
           headers: {
@@ -105,7 +105,7 @@ const Friend = ({
     try {
       setSendingRequest(true);
       const response = await fetch(
-        `http://localhost:3001/users/${_id}/friends/${friendId}/request`,
+        `https://socialpedia-serverr.onrender.com/users/${_id}/friends/${friendId}/request`,
         {
           method: "POST",
           headers: {
@@ -131,7 +131,7 @@ const Friend = ({
   const deletePost = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/posts/${postId}/delete`,
+        `https://socialpedia-serverr.onrender.com/posts/${postId}/delete`,
         {
           method: "DELETE",
           headers: {

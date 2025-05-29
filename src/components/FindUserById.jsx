@@ -24,13 +24,16 @@ const FindUserById = ({ userId, commentTime }) => {
         // // console.log(comment);
         // id = resultArray[0];
 
-        const response = await fetch(`http://localhost:3001/users/${userId}`, {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${token}`,
-            // 'Content-type': 'Application/json', // You may add this if needed
-          },
-        });
+        const response = await fetch(
+          `https://socialpedia-serverr.onrender.com/users/${userId}`,
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              // 'Content-type': 'Application/json', // You may add this if needed
+            },
+          }
+        );
 
         if (response.ok) {
           const user = await response.json();

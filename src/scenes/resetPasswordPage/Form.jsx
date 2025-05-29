@@ -49,7 +49,7 @@ const Form = () => {
 
   //   const login = async (values, onSubmitProps) => {
   //     const loggedInResponse = await fetch(
-  //       "http://localhost:3001/auth/login",
+  //       "https://socialpedia-serverr.onrender.com/auth/login",
   //       {
   //         method: "POST",
   //         headers: { "Content-type": "application/json" },
@@ -76,8 +76,8 @@ const Form = () => {
   //   };
   const resetPassword = async (values, onSubmitProps) => {
     const resetPasswordResponse = await fetch(
-      //   "http://localhost:3001/auth/login",
-      "http://localhost:3001/auth/reset_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2RiODRmNzljOTZkYmNlNDhjZTBkOCIsImlhdCI6MTcwNzk4NTU1NCwiZXhwIjoxNzA3OTg5MTU0fQ.cl5laGS5Af_eZ_tymUVTecdrtOUdx04AxIoomrs_yDc",
+      //   "https://socialpedia-serverr.onrender.com/auth/login",
+      "https://socialpedia-serverr.onrender.com/auth/reset_password/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Y2RiODRmNzljOTZkYmNlNDhjZTBkOCIsImlhdCI6MTcwNzk4NTU1NCwiZXhwIjoxNzA3OTg5MTU0fQ.cl5laGS5Af_eZ_tymUVTecdrtOUdx04AxIoomrs_yDc",
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
