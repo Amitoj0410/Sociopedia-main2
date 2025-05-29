@@ -295,7 +295,7 @@ const UserWidget = ({ userId, picturePath }) => {
                       alignItems="center"
                       justifyContent="space-between"
                     >
-                      <Typography variant="h6">Your Friends</Typography>
+                      <Typography variant="h6">Friends</Typography>
                       <IconButton onClick={handleCloseFrnds}>
                         <Close />
                       </IconButton>
