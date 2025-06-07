@@ -84,7 +84,7 @@ const Form = () => {
         body: JSON.stringify(values),
       }
     );
-    const loggedIn = await loggedInResponse.json();
+    const loggedIn = await resetPasswordResponse.json();
     onSubmitProps.resetForm();
     // console.log(loggedIn.user);
     if (loggedIn.user && loggedIn.token) {
