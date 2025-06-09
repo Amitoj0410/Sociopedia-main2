@@ -43,14 +43,6 @@ const FriendsListWidget = ({ userId }) => {
     getFriends();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     getFriends();
-  //   }, 5000);
-
-  //   return () => clearInterval(intervalId);
-  // }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
   return (
     <>
       {gettingFriends ? (

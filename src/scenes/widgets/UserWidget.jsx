@@ -81,7 +81,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   useEffect(() => {
     getFriends();
-  }, [friends2]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // const dispatch = useDispatch();
   const isFriend = (friendId) =>
