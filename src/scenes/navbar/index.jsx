@@ -22,6 +22,7 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
+  Slide,
 } from "@mui/material";
 // import { makeStyles } from "@mui/"
 import {
@@ -748,326 +749,333 @@ const Navbar = () => {
         </IconButton>
       )}
       {/* MOBILE NAV */}
-      {!isNonMobileScreens && isMobileMenuToggled && (
-        <Box
-          position="fixed"
-          right="0"
-          bottom="0"
-          height="100%"
-          zIndex="10"
-          maxWidth="500px"
-          minWidth="300px"
-          backgroundColor={background}
+      {!isNonMobileScreens && (
+        <Slide
+          direction="left"
+          in={isMobileMenuToggled}
+          mountOnEnter
+          unmountOnExit
+          // timeout={400}
         >
-          {/* CLOSE ICON */}
-          <Box display="flex" justifyContent="flex-end" p="1rem">
-            <IconButton
-              onClick={() => setIsMobileMenuToggled(!isMobileMenuToggled)}
-            >
-              <Close />
-            </IconButton>
-          </Box>
-
-          {/* MENU ITEMS */}
-          <FlexBetween
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
-            gap="3rem"
+          <Box
+            position="fixed"
+            right="0"
+            bottom="0"
+            height="100%"
+            zIndex="10"
+            maxWidth="500px"
+            minWidth="300px"
+            backgroundColor={background}
           >
-            <IconButton onClick={() => navigate("/trending")}>
-              <TagSharp sx={{ fontSize: "30px" }} />
-            </IconButton>
-            <IconButton
-              onClick={() => dispatch(setMode())}
-              sx={{ fontSize: "30px" }}
+            {/* CLOSE ICON */}
+            <Box display="flex" justifyContent="flex-end" p="1rem">
+              <IconButton onClick={() => setIsMobileMenuToggled(false)}>
+                <Close />
+              </IconButton>
+            </Box>
+
+            {/* MENU ITEMS */}
+            <FlexBetween
+              display="flex"
+              flexDirection="column"
+              justifyContent="center"
+              alignItems="center"
+              gap="3rem"
             >
-              {theme?.palette?.mode === "dark" ? (
-                <DarkMode sx={{ fontSize: "30px" }} />
-              ) : (
-                <LightMode sx={{ fontSize: "30px" }} />
-              )}
-            </IconButton>
-            <IconButton>
-              <Message sx={{ fontSize: "30px" }} />
-            </IconButton>
-            <IconButton
-              onClick={handleNotificationClick}
-              aria-controls={open ? "notification-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
-              <Badge
-                badgeContent={
-                  notifications?.length > 0 ? notifications?.length : null
-                }
-                color="secondary"
+              <IconButton onClick={() => navigate("/trending")}>
+                <TagSharp sx={{ fontSize: "30px" }} />
+              </IconButton>
+              <IconButton
+                onClick={() => dispatch(setMode())}
+                sx={{ fontSize: "30px" }}
               >
-                <Notifications sx={{ fontSize: "30px" }} />
-              </Badge>
-            </IconButton>
-            <Dialog
-              open={Boolean(anchorEl)}
-              onClose={handleNotificationClose}
-              maxWidth="sm"
-              fullWidth
-              PaperProps={{
-                sx: {
-                  height: "70vh",
-                  mt: 6,
-                  overflow: "hidden",
-                },
-              }}
-            >
-              <DialogTitle>
-                Notifications
-                <IconButton
-                  aria-label="close"
-                  onClick={handleNotificationClose}
-                  sx={{
-                    position: "absolute",
-                    right: 8,
-                    top: 8,
-                    color: (theme) => theme.palette.grey[500],
-                  }}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </DialogTitle>
-              <Divider />
-              <DialogContent sx={{ p: 0, overflowY: "auto" }}>
-                {notifications?.length === 0 ? (
-                  <Box sx={{ p: 2, textAlign: "center" }}>
-                    <Typography variant="body1">No notifications</Typography>
-                  </Box>
+                {theme?.palette?.mode === "dark" ? (
+                  <DarkMode sx={{ fontSize: "30px" }} />
                 ) : (
-                  <List>
-                    {notifications?.map((notification) => (
-                      <React.Fragment key={notification?._id}>
-                        <ListItem
-                          button
-                          onClick={() => {
-                            navigate(`/profile/${notification?.fromUser?._id}`);
-                          }}
-                          sx={{
-                            "&:hover": {
-                              backgroundColor: "action.hover",
-                            },
-                            py: 2,
-                            px: 2,
-                          }}
-                        >
-                          <Grid container alignItems="center" spacing={2}>
-                            <Grid item>
-                              <Avatar
-                                src={notification?.fromUser?.picturePath}
-                                sx={{ width: 50, height: 50 }}
-                              />
-                            </Grid>
-                            <Grid item xs>
-                              <Box>
-                                <Typography variant="subtitle1">
-                                  {`${notification?.fromUser?.firstName} ${notification?.fromUser?.lastName}`}
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="textSecondary"
-                                >
-                                  {notification?.type === "friend_request" &&
-                                    notification?.fromUser?.occupation}
-                                </Typography>
-                                <Typography
-                                  variant="body2"
-                                  color="textSecondary"
-                                >
-                                  {notification?.type === "friend_request" &&
-                                    notification?.fromUser?.location}
-                                </Typography>
-                                {notification?.type === "friend_request" && (
+                  <LightMode sx={{ fontSize: "30px" }} />
+                )}
+              </IconButton>
+              <IconButton>
+                <Message sx={{ fontSize: "30px" }} />
+              </IconButton>
+              <IconButton
+                onClick={handleNotificationClick}
+                aria-controls={open ? "notification-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+              >
+                <Badge
+                  badgeContent={
+                    notifications?.length > 0 ? notifications?.length : null
+                  }
+                  color="secondary"
+                >
+                  <Notifications sx={{ fontSize: "30px" }} />
+                </Badge>
+              </IconButton>
+              <Dialog
+                open={Boolean(anchorEl)}
+                onClose={handleNotificationClose}
+                maxWidth="sm"
+                fullWidth
+                PaperProps={{
+                  sx: {
+                    height: "70vh",
+                    mt: 6,
+                    overflow: "hidden",
+                  },
+                }}
+              >
+                <DialogTitle>
+                  Notifications
+                  <IconButton
+                    aria-label="close"
+                    onClick={handleNotificationClose}
+                    sx={{
+                      position: "absolute",
+                      right: 8,
+                      top: 8,
+                      color: (theme) => theme.palette.grey[500],
+                    }}
+                  >
+                    <CloseIcon />
+                  </IconButton>
+                </DialogTitle>
+                <Divider />
+                <DialogContent sx={{ p: 0, overflowY: "auto" }}>
+                  {notifications?.length === 0 ? (
+                    <Box sx={{ p: 2, textAlign: "center" }}>
+                      <Typography variant="body1">No notifications</Typography>
+                    </Box>
+                  ) : (
+                    <List>
+                      {notifications?.map((notification) => (
+                        <React.Fragment key={notification?._id}>
+                          <ListItem
+                            button
+                            onClick={() => {
+                              navigate(
+                                `/profile/${notification?.fromUser?._id}`
+                              );
+                            }}
+                            sx={{
+                              "&:hover": {
+                                backgroundColor: "action.hover",
+                              },
+                              py: 2,
+                              px: 2,
+                            }}
+                          >
+                            <Grid container alignItems="center" spacing={2}>
+                              <Grid item>
+                                <Avatar
+                                  src={notification?.fromUser?.picturePath}
+                                  sx={{ width: 50, height: 50 }}
+                                />
+                              </Grid>
+                              <Grid item xs>
+                                <Box>
+                                  <Typography variant="subtitle1">
+                                    {`${notification?.fromUser?.firstName} ${notification?.fromUser?.lastName}`}
+                                  </Typography>
                                   <Typography
                                     variant="body2"
-                                    color="primary"
-                                    mt={1}
+                                    color="textSecondary"
                                   >
-                                    Friend Request
+                                    {notification?.type === "friend_request" &&
+                                      notification?.fromUser?.occupation}
                                   </Typography>
-                                )}
-                                {notification?.type === "post_liked" && (
-                                  <>
+                                  <Typography
+                                    variant="body2"
+                                    color="textSecondary"
+                                  >
+                                    {notification?.type === "friend_request" &&
+                                      notification?.fromUser?.location}
+                                  </Typography>
+                                  {notification?.type === "friend_request" && (
                                     <Typography
                                       variant="body2"
                                       color="primary"
                                       mt={1}
                                     >
-                                      Liked your post
+                                      Friend Request
                                     </Typography>
-                                    <Typography
-                                      variant="body2"
-                                      color="textSecondary"
-                                    >
-                                      {notification?.post?.description}
-                                    </Typography>
-                                  </>
-                                )}
-                                {notification?.type === "post_commented" && (
-                                  <>
-                                    <Typography
-                                      variant="body2"
-                                      color="primary"
-                                      mt={1}
-                                    >
-                                      Commented on your post
-                                    </Typography>
-                                    <Typography
-                                      variant="body2"
-                                      color="textSecondary"
-                                    >
-                                      <strong>Comment: </strong>
-                                      {Array.isArray(
-                                        notification?.post?.comments
-                                      ) &&
-                                        notification?.post?.comments?.find(
-                                          (comment) =>
-                                            comment?.id ===
-                                            notification?.commentId
-                                        )?.body}
-                                    </Typography>
-                                    <Typography
-                                      variant="body2"
-                                      color="textSecondary"
-                                    >
-                                      <strong>Post: </strong>
-                                      {notification?.post?.description}
-                                    </Typography>
-                                  </>
-                                )}
-                              </Box>
-                            </Grid>
-                            {notification?.type === "friend_request" && (
-                              <Grid item>
-                                <Box
-                                  display="flex"
-                                  flexDirection="column"
-                                  gap={1}
-                                  ml={2}
-                                >
-                                  <Button
-                                    variant="contained"
-                                    color="primary"
-                                    size="small"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      acceptRequest(
-                                        user._id,
-                                        notification?.fromUser?._id,
-                                        notification?._id
-                                      );
-                                      dispatch(
-                                        removeNotification(notification?._id)
-                                      );
-                                      enqueueSnackbar(
-                                        "Friend Request Accepted",
-                                        {
-                                          variant: "success",
-                                        }
-                                      );
-                                    }}
-                                    disabled={acceptingRequest}
-                                  >
-                                    {acceptingRequest ? (
-                                      <CircularProgress
-                                        size={isXs || isSm ? 20 : 30}
-                                      />
-                                    ) : (
-                                      <>Accept</>
-                                    )}
-                                  </Button>
-                                  <Button
-                                    variant="contained"
-                                    color="error"
-                                    size="small"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      declineRequest(
-                                        user?._id,
-                                        notification?.fromUser?._id,
-                                        notification?._id
-                                      );
-                                      dispatch(
-                                        removeNotification(notification?._id)
-                                      );
-                                      enqueueSnackbar(
-                                        "Friend Request Declined",
-                                        {
-                                          variant: "warning",
-                                        }
-                                      );
-                                    }}
-                                  >
-                                    Decline
-                                  </Button>
+                                  )}
+                                  {notification?.type === "post_liked" && (
+                                    <>
+                                      <Typography
+                                        variant="body2"
+                                        color="primary"
+                                        mt={1}
+                                      >
+                                        Liked your post
+                                      </Typography>
+                                      <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                      >
+                                        {notification?.post?.description}
+                                      </Typography>
+                                    </>
+                                  )}
+                                  {notification?.type === "post_commented" && (
+                                    <>
+                                      <Typography
+                                        variant="body2"
+                                        color="primary"
+                                        mt={1}
+                                      >
+                                        Commented on your post
+                                      </Typography>
+                                      <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                      >
+                                        <strong>Comment: </strong>
+                                        {Array.isArray(
+                                          notification?.post?.comments
+                                        ) &&
+                                          notification?.post?.comments?.find(
+                                            (comment) =>
+                                              comment?.id ===
+                                              notification?.commentId
+                                          )?.body}
+                                      </Typography>
+                                      <Typography
+                                        variant="body2"
+                                        color="textSecondary"
+                                      >
+                                        <strong>Post: </strong>
+                                        {notification?.post?.description}
+                                      </Typography>
+                                    </>
+                                  )}
                                 </Box>
                               </Grid>
-                            )}
-                            {notification?.type !== "friend_request" && (
-                              <>
-                                {notification?.post?.picturePath && (
-                                  <Grid item>
-                                    <Box>
-                                      <img
-                                        src={notification?.post?.picturePath}
-                                        alt="Notification"
-                                        style={{
-                                          width: "60px",
-                                          height: "60px",
-                                          borderRadius: "8px",
-                                          objectFit: "cover",
-                                        }}
-                                      />
-                                    </Box>
-                                  </Grid>
-                                )}
-                                <IconButton
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    dispatch(
-                                      removeNotification(notification?._id)
-                                    );
-                                    removeNotif(user?._id, notification?._id);
-                                    enqueueSnackbar("Notification Removed", {
-                                      variant: "info",
-                                    });
-                                  }}
-                                  sx={{
-                                    border: "1px solid #ccc",
-                                    borderRadius: "50%",
-                                    padding: "4px",
-                                    "&:hover": {
-                                      borderColor: "#888",
-                                    },
-                                    ml: "10px",
-                                    mt: "5px",
-                                  }}
-                                >
-                                  <CloseIcon />
-                                </IconButton>
-                              </>
-                            )}
-                          </Grid>
-                        </ListItem>
-                        <Divider />
-                      </React.Fragment>
-                    ))}
-                  </List>
-                )}
-              </DialogContent>
-            </Dialog>
+                              {notification?.type === "friend_request" && (
+                                <Grid item>
+                                  <Box
+                                    display="flex"
+                                    flexDirection="column"
+                                    gap={1}
+                                    ml={2}
+                                  >
+                                    <Button
+                                      variant="contained"
+                                      color="primary"
+                                      size="small"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        acceptRequest(
+                                          user._id,
+                                          notification?.fromUser?._id,
+                                          notification?._id
+                                        );
+                                        dispatch(
+                                          removeNotification(notification?._id)
+                                        );
+                                        enqueueSnackbar(
+                                          "Friend Request Accepted",
+                                          {
+                                            variant: "success",
+                                          }
+                                        );
+                                      }}
+                                      disabled={acceptingRequest}
+                                    >
+                                      {acceptingRequest ? (
+                                        <CircularProgress
+                                          size={isXs || isSm ? 20 : 30}
+                                        />
+                                      ) : (
+                                        <>Accept</>
+                                      )}
+                                    </Button>
+                                    <Button
+                                      variant="contained"
+                                      color="error"
+                                      size="small"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        declineRequest(
+                                          user?._id,
+                                          notification?.fromUser?._id,
+                                          notification?._id
+                                        );
+                                        dispatch(
+                                          removeNotification(notification?._id)
+                                        );
+                                        enqueueSnackbar(
+                                          "Friend Request Declined",
+                                          {
+                                            variant: "warning",
+                                          }
+                                        );
+                                      }}
+                                    >
+                                      Decline
+                                    </Button>
+                                  </Box>
+                                </Grid>
+                              )}
+                              {notification?.type !== "friend_request" && (
+                                <>
+                                  {notification?.post?.picturePath && (
+                                    <Grid item>
+                                      <Box>
+                                        <img
+                                          src={notification?.post?.picturePath}
+                                          alt="Notification"
+                                          style={{
+                                            width: "60px",
+                                            height: "60px",
+                                            borderRadius: "8px",
+                                            objectFit: "cover",
+                                          }}
+                                        />
+                                      </Box>
+                                    </Grid>
+                                  )}
+                                  <IconButton
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      dispatch(
+                                        removeNotification(notification?._id)
+                                      );
+                                      removeNotif(user?._id, notification?._id);
+                                      enqueueSnackbar("Notification Removed", {
+                                        variant: "info",
+                                      });
+                                    }}
+                                    sx={{
+                                      border: "1px solid #ccc",
+                                      borderRadius: "50%",
+                                      padding: "4px",
+                                      "&:hover": {
+                                        borderColor: "#888",
+                                      },
+                                      ml: "10px",
+                                      mt: "5px",
+                                    }}
+                                  >
+                                    <CloseIcon />
+                                  </IconButton>
+                                </>
+                              )}
+                            </Grid>
+                          </ListItem>
+                          <Divider />
+                        </React.Fragment>
+                      ))}
+                    </List>
+                  )}
+                </DialogContent>
+              </Dialog>
 
-            <IconButton>
-              <Help sx={{ fontSize: "30px" }} />
-            </IconButton>
-            {/* <FormControl variant="standard">
+              <IconButton>
+                <Help sx={{ fontSize: "30px" }} />
+              </IconButton>
+              {/* <FormControl variant="standard">
               <Select
                 value={fullName}
                 sx={{
@@ -1109,70 +1117,71 @@ const Navbar = () => {
                 </MenuItem>
               </Select>
             </FormControl> */}
-            <Box>
-              <IconButton onClick={handleOpen}>
-                <Avatar
-                  alt={fullName}
-                  src={fullNameInitial}
-                  sx={{
-                    width: 30,
-                    height: 30,
-                    bgcolor: "primary.main",
-                    color: "white",
-                  }}
-                />
-              </IconButton>
-              <Menu
-                anchorEl={anchorEl2}
-                open={Boolean(anchorEl2)}
-                onClose={handleClose}
-              >
-                {/* <MenuItem disabled>
+              <Box>
+                <IconButton onClick={handleOpen}>
+                  <Avatar
+                    alt={fullName}
+                    src={fullNameInitial}
+                    sx={{
+                      width: 30,
+                      height: 30,
+                      bgcolor: "primary.main",
+                      color: "white",
+                    }}
+                  />
+                </IconButton>
+                <Menu
+                  anchorEl={anchorEl2}
+                  open={Boolean(anchorEl2)}
+                  onClose={handleClose}
+                >
+                  {/* <MenuItem disabled>
                   <Typography>{fullName}</Typography>
                 </MenuItem> */}
-                <MenuItem
-                  onClick={() => {
-                    navigate("/profile/edit");
-                    handleClose();
+                  <MenuItem
+                    onClick={() => {
+                      navigate("/profile/edit");
+                      handleClose();
+                    }}
+                  >
+                    <AccountCircleRounded sx={{ mr: "5px" }} />
+                    <Typography>Edit Profile</Typography>
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      dispatch(setLogout());
+                      navigate("/");
+                      handleClose();
+                    }}
+                  >
+                    <LogoutSharp sx={{ mr: "5px" }} />
+                    <Typography>Log Out</Typography>
+                  </MenuItem>
+                </Menu>
+              </Box>
+              <FlexBetween
+                backgroundColor={neutralLight}
+                borderRadius="9px"
+                gap="3rem"
+                padding="0.1rem 1.5rem"
+              >
+                <InputBase
+                  placeholder="Search..."
+                  value={searchInput}
+                  onChange={searchOnChange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleSearch();
+                    }
                   }}
-                >
-                  <AccountCircleRounded sx={{ mr: "5px" }} />
-                  <Typography>Edit Profile</Typography>
-                </MenuItem>
-                <MenuItem
-                  onClick={() => {
-                    dispatch(setLogout());
-                    navigate("/");
-                    handleClose();
-                  }}
-                >
-                  <LogoutSharp sx={{ mr: "5px" }} />
-                  <Typography>Log Out</Typography>
-                </MenuItem>
-              </Menu>
-            </Box>
-            <FlexBetween
-              backgroundColor={neutralLight}
-              borderRadius="9px"
-              gap="3rem"
-              padding="0.1rem 1.5rem"
-            >
-              <InputBase
-                placeholder="Search..."
-                value={searchInput}
-                onChange={searchOnChange}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") {
-                    handleSearch();
-                  }
-                }}
-              />
-              <IconButton onClick={handleSearch}>
-                <Search />
-              </IconButton>
+                />
+                <IconButton onClick={handleSearch}>
+                  <Search />
+                </IconButton>
+              </FlexBetween>
             </FlexBetween>
-          </FlexBetween>
-        </Box>
+          </Box>
+        </Slide>
       )}
     </FlexBetween>
   );
