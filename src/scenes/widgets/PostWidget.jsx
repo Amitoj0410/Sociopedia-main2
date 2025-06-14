@@ -265,14 +265,19 @@ const PostWidget = ({
         {parseTextWithHashtags(description, primary, handleHashtagClick)}
       </Typography>
       {picturePath && (
-        <img
-          width="100%"
-          height="auto"
-          alt="post"
-          style={{ borderRadius: "0.75rem", marginTop: "0.75rem" }}
-          src={picturePath}
-          className="inner-icons"
-        />
+        <Box sx={{ "&:hover": { cursor: "pointer" } }} className="inner-icons">
+          <img
+            width="100%"
+            style={{
+              borderRadius: "0.75rem",
+              marginTop: "0.75rem",
+              maxHeight: isXs || isSm ? "300px" : "500px", // adjust as needed
+              objectFit: "cover", // or "contain" depending on what you want
+            }}
+            alt="post"
+            src={picturePath}
+          />
+        </Box>
       )}
       {videoPath && (
         <Box sx={{ "&:hover": { cursor: "pointer" } }} className="inner-icons">
@@ -282,8 +287,8 @@ const PostWidget = ({
             style={{
               borderRadius: "0.75rem",
               marginTop: "0.75rem",
-              // maxHeight: "25rem",
-              // objectFit: "scale-down",
+              maxHeight: isXs || isSm ? "300px" : "500px", // adjust as needed
+              objectFit: "cover", // or "contain" depending on what you want
             }}
           >
             <source src={videoPath} type="video/mp4" />

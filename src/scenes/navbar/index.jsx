@@ -31,6 +31,7 @@ import {
   DarkMode,
   LightMode,
   Notifications,
+  NotificationsOutlined,
   Help,
   Menu as MenuIcon,
   Close,
@@ -458,7 +459,7 @@ const Navbar = () => {
               {theme.palette.mode === "dark" ? (
                 <DarkMode sx={{ fontSize: "30px" }} />
               ) : (
-                <LightMode sx={{ fontSize: "30px" }} />
+                <LightMode sx={{ fontSize: "30px", color: "#f1c40f" }} />
               )}
             </IconButton>
           </Tooltip>
@@ -478,7 +479,11 @@ const Navbar = () => {
                 }
                 color="secondary"
               >
-                <Notifications sx={{ fontSize: "30px" }} />
+                {Boolean(anchorEl) ? (
+                  <Notifications sx={{ fontSize: "30px" }} />
+                ) : (
+                  <NotificationsOutlined sx={{ fontSize: "30px" }} />
+                )}
               </Badge>
             </IconButton>
           </Tooltip>
@@ -496,6 +501,7 @@ const Navbar = () => {
               vertical: "top",
               horizontal: "right",
             }}
+            disableScrollLock
             PaperProps={{
               elevation: 1,
               sx: {
@@ -686,11 +692,11 @@ const Navbar = () => {
               ))
             )}
           </Menu>
-          <Tooltip title={<Typography fontSize={13}>About</Typography>} arrow>
+          {/* <Tooltip title={<Typography fontSize={13}>About</Typography>} arrow>
             <IconButton>
               <Help sx={{ fontSize: "30px" }} />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Box>
             <IconButton onClick={handleOpen}>
               <Avatar
@@ -708,6 +714,15 @@ const Navbar = () => {
               anchorEl={anchorEl2}
               open={Boolean(anchorEl2)}
               onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              disableScrollLock
             >
               {/* <MenuItem disabled>
                   <Typography>{fullName}</Typography>
@@ -795,9 +810,9 @@ const Navbar = () => {
                   <LightMode sx={{ fontSize: "30px" }} />
                 )}
               </IconButton>
-              <IconButton>
+              {/* <IconButton>
                 <Message sx={{ fontSize: "30px" }} />
-              </IconButton>
+              </IconButton> */}
               <IconButton
                 onClick={handleNotificationClick}
                 aria-controls={open ? "notification-menu" : undefined}

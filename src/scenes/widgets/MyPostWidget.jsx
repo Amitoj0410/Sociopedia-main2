@@ -223,7 +223,13 @@ const MyPostWidget = ({ picturePath, userId }) => {
       <Divider sx={{ marginY: "1.15rem" }} />
 
       <FlexBetween>
-        <FlexBetween gap="0.25rem" onClick={() => setIsImage(!isImage)}>
+        <FlexBetween
+          gap="0.25rem"
+          onClick={() => {
+            setIsImage(!isImage);
+            setIsVideo(false);
+          }}
+        >
           <ImageOutlined sx={{ color: mediumMain }} />
           <Typography
             color={mediumMain}
@@ -236,7 +242,13 @@ const MyPostWidget = ({ picturePath, userId }) => {
         {isNonMobileScreens ? (
           <>
             <FlexBetween gap="0.25rem">
-              <FlexBetween gap="0.25rem" onClick={() => setIsVideo(!isVideo)}>
+              <FlexBetween
+                gap="0.25rem"
+                onClick={() => {
+                  setIsVideo(!isVideo);
+                  setIsImage(false);
+                }}
+              >
                 <VideoCameraBackOutlined sx={{ color: mediumMain }} />
                 <Typography
                   color={mediumMain}
