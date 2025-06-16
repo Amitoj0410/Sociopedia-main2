@@ -239,25 +239,25 @@ const MyPostWidget = ({ picturePath, userId }) => {
           </Typography>
         </FlexBetween>
 
+        <FlexBetween
+          gap="0.25rem"
+          onClick={() => {
+            setIsVideo(!isVideo);
+            setIsImage(false);
+          }}
+        >
+          <VideoCameraBackOutlined sx={{ color: mediumMain }} />
+          <Typography
+            color={mediumMain}
+            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+          >
+            Video
+          </Typography>
+        </FlexBetween>
+
         {isNonMobileScreens ? (
           <>
-            <FlexBetween gap="0.25rem">
-              <FlexBetween
-                gap="0.25rem"
-                onClick={() => {
-                  setIsVideo(!isVideo);
-                  setIsImage(false);
-                }}
-              >
-                <VideoCameraBackOutlined sx={{ color: mediumMain }} />
-                <Typography
-                  color={mediumMain}
-                  sx={{ "&:hover": { cursor: "pointer", color: medium } }}
-                >
-                  Video
-                </Typography>
-              </FlexBetween>
-            </FlexBetween>
+            {/* <FlexBetween gap="0.25rem"></FlexBetween> */}
 
             <FlexBetween gap="0.25rem">
               <AttachFileOutlined sx={{ color: mediumMain }} />
