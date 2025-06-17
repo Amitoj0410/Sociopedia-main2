@@ -130,6 +130,12 @@ const Friend = ({
 
   const deletePost = async () => {
     try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this post?"
+      );
+      if (!confirm) {
+        return;
+      }
       const response = await fetch(
         `https://socialpedia-server-main-v2.onrender.com/posts/${postId}/delete`,
         {
