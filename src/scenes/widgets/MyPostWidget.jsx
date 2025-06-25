@@ -73,6 +73,7 @@ const MyPostWidget = ({ picturePath, userId }) => {
         }
       );
       if (!response.ok) {
+        console.log("kutta");
         throw new Error("Network response was not ok");
       }
 
@@ -85,7 +86,7 @@ const MyPostWidget = ({ picturePath, userId }) => {
       setPost("");
       setCreatePostBtnClicked(false);
     } catch (err) {
-      console.error("Error during fetch:", err);
+      console.error("Error during uploading post:", err.message);
     }
   };
 

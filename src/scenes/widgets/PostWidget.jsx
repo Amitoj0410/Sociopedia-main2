@@ -63,6 +63,9 @@ const PostWidget = ({
   const isXs = useMediaQuery(breakpoints.only("xs"));
   const isSm = useMediaQuery(breakpoints.only("sm"));
 
+  const videoRef = React.useRef(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
   const patchLike = async () => {
     try {
       setPatchingLike(true);
@@ -237,6 +240,26 @@ const PostWidget = ({
     getPostsByHashtags(cleanHashtag);
   };
 
+  React.useEffect(() => {
+    const handleFullscreenChange = () => {
+      const isFullScreenNow =
+        document.fullscreenElement === videoRef.current ||
+        document.webkitFullscreenElement === videoRef.current;
+      setIsFullscreen(isFullScreenNow);
+    };
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      document.removeEventListener(
+        "webkitfullscreenchange",
+        handleFullscreenChange
+      );
+    };
+  }, []);
+
   return (
     <SpecialWidgetWrapper
       mb={`2rem`}
@@ -281,7 +304,7 @@ const PostWidget = ({
       )}
       {videoPath && (
         <Box sx={{ "&:hover": { cursor: "pointer" } }} className="inner-icons">
-          <video
+          {/* <video
             width="100%"
             controls
             style={{
@@ -290,6 +313,24 @@ const PostWidget = ({
               maxHeight: isXs || isSm ? "300px" : "500px", // adjust as needed
               objectFit: "cover", // or "contain" depending on what you want
             }}
+          >
+            <source src={videoPath} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video> */}
+          <video
+            ref={videoRef}
+            width="100%"
+            controls
+            style={
+              isFullscreen
+                ? { borderRadius: "0.75rem", marginTop: "0.75rem" } // only minimal styles
+                : {
+                    borderRadius: "0.75rem",
+                    marginTop: "0.75rem",
+                    maxHeight: isXs || isSm ? "300px" : "500px",
+                    objectFit: "cover",
+                  }
+            }
           >
             <source src={videoPath} type="video/mp4" />
             Your browser does not support the video tag.
