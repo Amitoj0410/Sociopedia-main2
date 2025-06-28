@@ -28,6 +28,7 @@ import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import IsCommentLiked from "components/IsCommentLiked";
 import SpecialWidgetWrapper from "components/SpecialWidgetWrapper";
+import VideoPlayer from "components/VideoPlayer";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -240,23 +241,39 @@ const PostWidget = ({
     getPostsByHashtags(cleanHashtag);
   };
 
+  // const handleFullscreen = () => {
+  //   if (videoRef.current.requestFullscreen) {
+  //     videoRef.current.requestFullscreen();
+  //   }
+  // };
+
+  // React.useEffect(() => {
+  //   const handleFullscreenChange = () => {
+  //     const isFullScreenNow =
+  //       document.fullscreenElement === videoRef.current ||
+  //       document.webkitFullscreenElement === videoRef.current;
+  //     setIsFullscreen(isFullScreenNow);
+  //   };
+
+  //   document.addEventListener("fullscreenchange", handleFullscreenChange);
+  //   document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
+
+  //   return () => {
+  //     document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  //     document.removeEventListener(
+  //       "webkitfullscreenchange",
+  //       handleFullscreenChange
+  //     );
+  //   };
+  // }, []);
+
   React.useEffect(() => {
     const handleFullscreenChange = () => {
-      const isFullScreenNow =
-        document.fullscreenElement === videoRef.current ||
-        document.webkitFullscreenElement === videoRef.current;
-      setIsFullscreen(isFullScreenNow);
+      setIsFullscreen(!!document.fullscreenElement);
     };
-
     document.addEventListener("fullscreenchange", handleFullscreenChange);
-    document.addEventListener("webkitfullscreenchange", handleFullscreenChange);
-
     return () => {
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
-      document.removeEventListener(
-        "webkitfullscreenchange",
-        handleFullscreenChange
-      );
     };
   }, []);
 
@@ -305,36 +322,29 @@ const PostWidget = ({
       {videoPath && (
         <Box sx={{ "&:hover": { cursor: "pointer" } }} className="inner-icons">
           {/* <video
+            ref={videoRef}
             width="100%"
             controls
             style={{
               borderRadius: "0.75rem",
               marginTop: "0.75rem",
-              maxHeight: isXs || isSm ? "300px" : "500px", // adjust as needed
-              objectFit: "cover", // or "contain" depending on what you want
+              objectFit: isFullscreen ? "contain" : "cover",
+              maxHeight: isFullscreen
+                ? "100vh"
+                : isXs || isSm
+                ? "300px"
+                : "500px",
+              width: "100%",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.25)",
+              backgroundColor: "black",
+              transition: "all 0.3s ease-in-out",
             }}
           >
             <source src={videoPath} type="video/mp4" />
             Your browser does not support the video tag.
           </video> */}
-          <video
-            ref={videoRef}
-            width="100%"
-            controls
-            style={
-              isFullscreen
-                ? { borderRadius: "0.75rem", marginTop: "0.75rem" } // only minimal styles
-                : {
-                    borderRadius: "0.75rem",
-                    marginTop: "0.75rem",
-                    maxHeight: isXs || isSm ? "300px" : "500px",
-                    objectFit: "cover",
-                  }
-            }
-          >
-            <source src={videoPath} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+
+          <VideoPlayer src={videoPath} />
         </Box>
       )}
       <FlexBetween mt="0.25rem" className="inner-icons">

@@ -1,0 +1,56 @@
+/* Regular wrapper styles */
+.video-player-wrapper {
+  max-width: 900px;
+  margin: 1rem auto;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+  background: #000;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transform-origin: center;
+  position: relative;
+  object-fit: contain;
+}
+
+/* Hover effect */
+.video-player-wrapper:hover {
+  transform: scale(1.03);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  transition: transform 0.4s ease;
+}
+
+/* Base video style */
+.video-player-wrapper video.plyr {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  background: #000;
+}
+
+/* 👇 THIS IS THE MAGIC 👇 */
+.plyr--fullscreen.video-player-wrapper {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background-color: black !important;
+  z-index: 9999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 🟢 THIS IS WHAT FIXES TALL VIDEOS */
+.plyr--fullscreen.video-player-wrapper video.plyr {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  border-radius: 0 !important;
+  background-color: black !important;
+}
