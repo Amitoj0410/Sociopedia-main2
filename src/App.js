@@ -21,6 +21,7 @@ function App() {
   const token = useSelector((state) => state.token);
   const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
   const isAuth = Boolean(token);
+  //trick
 
   // Check token expiration on component mount and update Redux state accordingly
   useEffect(() => {
